@@ -63,6 +63,8 @@ export class Database {
 
     if (rowIndex > -1) {
       this.#database[table][rowIndex].completed_at = !this.#database[table][rowIndex].completed_at
+      this.#database[table][rowIndex].updated_at = new Date()
+      this.#persist()
     }
   }
 
