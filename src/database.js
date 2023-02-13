@@ -54,6 +54,8 @@ export class Database {
       this.#database[table][rowIndex].description = data.description
       this.#database[table][rowIndex].updated_at = new Date()
       this.#persist()
+
+      return this.#database[table][rowIndex]
     }
   }
 
@@ -65,6 +67,8 @@ export class Database {
       this.#database[table][rowIndex].completed_at = !this.#database[table][rowIndex].completed_at
       this.#database[table][rowIndex].updated_at = new Date()
       this.#persist()
+
+      return this.#database[table][rowIndex]
     }
   }
 
@@ -72,8 +76,11 @@ export class Database {
     const rowIndex = this.#database[table].findIndex(row => row.id === id)
 
     if (rowIndex > -1) {
+      const deletedTask = this.#database[table][rowIndex]
       this.#database[table].splice(rowIndex, 1)
       this.#persist()
+
+      return deletedTask
     }
   }
 }
